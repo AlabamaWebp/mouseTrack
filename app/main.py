@@ -46,7 +46,7 @@ app = FastAPI(
 # Include routers
 app.include_router(upload.router)
 app.include_router(tasks.router)
-app.include_router(auth.router)
+# app.include_router(auth.router)
 
 
 @app.get("/")

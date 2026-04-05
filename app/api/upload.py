@@ -15,7 +15,7 @@ router = APIRouter(prefix="/api/v1/videos", tags=["videos"])
 async def upload_video(
     video: UploadFile = File(...),
     user_id: str = Form(...),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Upload a video file for processing.
@@ -32,11 +32,13 @@ async def upload_video(
         if not result["is_duplicate"]:
             await manager.broadcast_queue_status(
                 nn_status="busy" if result["status"] == "pending" else "idle",
-                pending_queue=[{
-                    "task_id": result["task_id"],
-                    "filename": video.filename or "unknown",
-                    "user_id": user_id
-                }]
+                pending_queue=[
+                    {
+                        "task_id": result["task_id"],
+                        "filename": video.filename or "unknown",
+                        "user_id": user_id,
+                    }
+                ],
             )
 
         return result

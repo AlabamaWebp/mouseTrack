@@ -28,12 +28,12 @@ def validate_video_extension(filename: str) -> bool:
     return ext in settings.allowed_video_extensions
 
 
-def validate_file_size(file: BinaryIO) -> bool:
-    """Check if the file size is within the allowed limit."""
-    file.seek(0, os.SEEK_END)
-    size = file.tell()
-    file.seek(0)
-    return size <= settings.max_file_size_bytes
+# def validate_file_size(file: BinaryIO) -> bool:
+#     """Check if the file size is within the allowed limit."""
+#     file.seek(0, os.SEEK_END)
+#     size = file.tell()
+#     file.seek(0)
+#     return size <= settings.max_file_size_bytes
 
 
 def get_safe_filename(filename: str) -> str:
